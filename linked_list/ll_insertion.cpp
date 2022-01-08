@@ -1,4 +1,5 @@
 #include <iostream>
+#include <array>
 class Node
 {
 public:
@@ -14,6 +15,7 @@ public:
     void print();
     void append(int new_data);
     void insertAfter(Node *prev_node, int new_data);
+    void addAll(int int_arr[], int size);
 };
 
 void LinkedList::push(int _data)
@@ -53,6 +55,12 @@ void LinkedList::append(int new_data)
     return;
 }
 
+std::ostream &operator<<(std::ostream &output, LinkedList ll)
+{
+    ll.print();
+    return output;
+}
+
 void LinkedList::insertAfter(Node *prev_node, int new_data)
 {
     if (prev_node == NULL)
@@ -66,6 +74,14 @@ void LinkedList::insertAfter(Node *prev_node, int new_data)
     prev_node->next = new_node;
 }
 
+void LinkedList::addAll(int int_arr[], int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        append(int_arr[i]);
+    }
+}
+
 int main()
 {
     LinkedList ll;
@@ -73,6 +89,9 @@ int main()
     ll.append(3);
     ll.append(5);
     ll.append(7);
-    ll.print();
+    int int_arr[5] = {45, 23, 67, 89, 22};
+    ll.addAll(int_arr, 5);
+    std::cout
+        << ll;
     return 0;
 }
